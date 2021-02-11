@@ -51,6 +51,8 @@ class BaseModel():
         """
         Saves an objec to  a JSON file
         """
+        from models import storage
+        storage = FileStorage()
         updated_at = datetime.now().isoformat()
 
     def to_dict(self):
