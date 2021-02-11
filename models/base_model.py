@@ -44,6 +44,10 @@ class BaseModel():
         updated_at = datetime.datetime.now().isoformat()
 
     def to_dict(self):
-        dict = self.__dict__
+        """
+        returns a dictionary with all keys and values of __dict__
+        also adds key class to the dictionary with class name
+        """
+        dict = self.__dict__.copy()
         dict["__class__"] = self.__class__.__name__
-        return self.__dict__
+        return dict
