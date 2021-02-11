@@ -8,7 +8,7 @@ class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file
     to instances
     """
-    __file_path = None
+    __file_path = 'file.json'
     __objects = dict()
 
     def __init__(self, *args, **kwargs):
@@ -31,11 +31,15 @@ class FileStorage:
         """Serializes __objects to the JSON file (path: __file_path)
         """
 
-        with open(__file_path, 'w') as file:
-            json.dump(__objects, file)
+        with open(self.__file_path, 'w') as file:
+            json.dump(self.__objects, file)
 
     def reload(self):
         """Deserializes the JSON file to __objects
         """
-        with open(__file_path, 'r') as file:
-            __objects = json.load(file)
+        try:
+            with open(self.__file_path, 'r') as file:
+                self.__objects = json.load(file)
+        except FileNotFoundError:
+            pass
+
