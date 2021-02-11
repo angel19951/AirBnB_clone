@@ -2,7 +2,7 @@
 # This modul recreates a BaseModel from another one by using a
 # dictionary representation.
 import json
-
+from models.base_model import BaseModel
 
 class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file
@@ -10,6 +10,8 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = dict()
+    my_classes = {'BaseModel' : BaseModel}
+    
 
     def __init__(self, *args, **kwargs):
         """Initializer
@@ -41,7 +43,14 @@ class FileStorage:
         """Deserializes the JSON file to __objects
         """
         try:
+            aux_dict = {}
+            obj_dict = {}
             with open(self.__file_path, 'r') as file:
-                self.__objects = json.load(file)
+                aux_dict = json.load(file)
+                for k, str_obj in aux_dict.items():
+                    print("here")
+                    model = my_classes[str_obj[0: str_obj.index('.')]]
+                    obj_dict = {k, model(json.load(str_obj))}
+                self.__objects = obj_dict
         except:
             pass
