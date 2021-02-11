@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import uuid
-import datetime
+from datetime import datetime
 
 """
 This module contains the BaseModel class
@@ -19,16 +19,24 @@ class BaseModel():
     created_at (datetime): date created
     updated_at (datetime): date updated
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initializes the BaseModel class
         Attributes:
         name (str): name of the user
         my_number (int): id number
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now().isoformat()
-        self.updated_at = datetime.datetime.now().isoformat()
+        if len(kwargs) == 0:
+
+           self.id = str(uuid.uuid4())
+           self.created_at = datetime.now().isoformat()
+           self.updated_at = datetime.now().isoformat()
+        else:
+            for k, v in kwargs.items():
+                self.__dict__[k] = v
+            del self.__dict__['__class__']
+            self.__dict__['created_at'] = datetime.strptime(self.__dict__['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
+
 
     def __str__(self):
         """
