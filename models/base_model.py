@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from models.__init__ import storage
+import models
 
 """
 This module contains the BaseModel class
@@ -32,7 +32,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
+            models.storage.new(self)
         else:
             for k, v in kwargs.items():
                 self.__dict__[k] = v
@@ -53,7 +53,7 @@ class BaseModel():
         """
         Saves an objec to  a JSON file
         """
-        storage.save()
+        models.storage.save()
         updated_at = datetime.now().isoformat()
 
     def to_dict(self):
