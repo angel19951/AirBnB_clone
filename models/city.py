@@ -8,7 +8,5 @@ class City(BaseModel):
     """
     city subclass of BaseModel
     """
-    def __init__(self):
-        """ initializer """
-        state_id = ""
-        name = ""
+    state_id = ""
+    name = ""

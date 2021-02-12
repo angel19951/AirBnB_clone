@@ -8,6 +8,4 @@ class State(BaseModel):
     """
     state subclass of BaseModel
     """
-    def __init__(self):
-        """ initializer """
-        name = ""
+    name = ""
