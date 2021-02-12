@@ -42,7 +42,11 @@ class HBNBCommand(cmd.Cmd):
         if self.lastcmd:
             self.lastcmd = ""
             return self.onecmd("\n")
+
     def postloop(self):
+        """
+        Print empty line post cmd loop
+        """
         print(end="")
 
     def do_quit(self, arg):
