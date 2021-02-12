@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     """
     This is our console class
     """
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_help(self, arg):
         """
@@ -27,8 +27,8 @@ class HBNBCommand(cmd.Cmd):
             print("EOF " + " help " + " quit")
             print()
         try:
-                topic = getattr(self, "help_" + arg)
-                return topic()
+            topic = getattr(self, "help_" + arg)
+            return topic()
         except AttributeError:
             pass
         else:
@@ -104,7 +104,34 @@ class HBNBCommand(cmd.Cmd):
            print("** class doesn't exist **")
 
     def do_update(self, arg):
-        
+       """Updates an instance based on the class name and id by adding
+       or updating attribute
+       """
+       if not arg:
+           print("** class name missing **")
+           return
+       arg_list = arg.split()
+       if arg_list[0] in storage.my_classes.keys():
+           if len(arg_list) < 2:
+               print ("** instance id missing **")
+               return
+           input_key = arg_list[0] + "." + arg_list[1]
+           if input_key not in storage.all():
+               print("** no instance found **")
+               return
+           if len(arg_list) < 3:
+               print("** attribute name missing **")
+               return
+           if len(arg_list) < 4:
+               print("** value missing **")
+               return
+           if arg_list[2] in storage.all()[input_key].__dict__:
+               arg_list[3] = type(storage.all()[input_key].__dict__[arg_list[2]])(arg_list[3])
+           storage.all()[input_key].__dict__[arg_list[2]] = json.loads(arg_list[3])
+           storage.save()
+       else:
+           print("** class doesn't exist **")
+
     def emptyline(self):
         """
         Empties the prompt
