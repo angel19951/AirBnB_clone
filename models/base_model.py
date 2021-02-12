@@ -46,7 +46,7 @@ class BaseModel():
         """
         String rep of a class
         """
-        return "[" + self.__class__.__name__ + "]" + "(" + self.id + ")" +\
+        return "[" + self.__class__.__name__ + "] " + "(" + self.id + ")" +\
             str(self.__dict__)
 
     def save(self):
