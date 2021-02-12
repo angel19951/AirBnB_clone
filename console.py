@@ -5,8 +5,10 @@ This module is the console for the AirBnB clone
 import cmd
 import sys
 import os
+import json
 from models import storage
 from models.base_model import BaseModel
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -34,11 +36,18 @@ class HBNBCommand(cmd.Cmd):
                 return
 
     def do_create(self, arg):
-        """Create a new instance of BaseModel or that isnherits from BaseModel
+        """
+        Create a new instance of BaseModel or that isnherits from BaseModel
         """
         if not arg:
             print("** class name missing **")
-
+        elif arg in storage.my_classes.keys():
+            new_obj = storage.my_classes[arg]()
+            storage.new(new_obj)
+            storage.save()
+            print(new_obj.id)
+        else:
+            print("** class doesn't exist **")
 
     def emptyline(self):
         """
