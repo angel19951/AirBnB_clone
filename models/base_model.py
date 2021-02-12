@@ -53,8 +53,8 @@ class BaseModel():
         """
         Saves an objec to  a JSON file
         """
+        self.updated_at = datetime.now().isoformat()
         models.storage.save()
-        updated_at = datetime.now().isoformat()
 
     def to_dict(self):
         """
