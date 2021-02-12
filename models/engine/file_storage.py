@@ -4,14 +4,14 @@
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file
     to instances
     """
     __file_path = 'file.json'
     __objects = dict()
-    my_classes = {'BaseModel' : BaseModel}
-    
+    my_classes = {'BaseModel': BaseModel}
 
     def __init__(self, *args, **kwargs):
         """Initializer
@@ -43,16 +43,11 @@ class FileStorage:
         """Deserializes the JSON file to __objects
         """
         try:
-            aux_dict = {}
-            obj_dict = {}
             with open(self.__file_path, 'r') as file:
                 aux_dict = json.load(file)
-                for k, str_obj in aux_dict.items():
-                   # print("here")
+                self.__objects = {}
+                for k, att_dict in aux_dict.items():
                     model = self.my_classes[k[0: k.index('.')]]
-                    obj_dict[k] = model(str_obj.items())
-                    #print(self.my_classes[k[0: k.index('.')]])
-                    #print(type(obj_dict))
-                self.__objects = obj_dict
+                    self.__objects[k] = model(**att_dict)
         except FileNotFoundError:
             pass
