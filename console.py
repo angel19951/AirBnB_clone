@@ -5,7 +5,8 @@ This module is the console for the AirBnB clone
 import cmd
 import sys
 import os
-
+from models import storage
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -24,16 +25,20 @@ class HBNBCommand(cmd.Cmd):
             print("EOF " + " help " + " quit")
             print()
         try:
-            try:
                 topic = getattr(self, "help_" + arg)
                 return topic()
-            except AttributeError:
-                command = getattr(self, "do_" + arg)
         except AttributeError:
             pass
         else:
             if sys.flags.optimize >= 2:
                 return
+
+    def do_create(self, arg):
+        """Create a new instance of BaseModel or that isnherits from BaseModel
+        """
+        if not arg:
+            print("** class name missing **")
+
 
     def emptyline(self):
         """
@@ -66,6 +71,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Exits the program using EOF command
         """
+        print("EOF")
         return True
 
     def help_EOF(self):
