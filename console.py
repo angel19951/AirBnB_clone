@@ -22,6 +22,7 @@ class HBNBCommand(cmd.Cmd):
             print("Documented commands (type help <topic>):")
             print("=========================================")
             print("EOF " + " help " + " quit")
+            print()
         try:
             try:
                 topic = getattr(self, "help_" + arg)
@@ -41,6 +42,8 @@ class HBNBCommand(cmd.Cmd):
         if self.lastcmd:
             self.lastcmd = ""
             return self.onecmd("\n")
+    def postloop(self):
+        print(end="")
 
     def do_quit(self, arg):
         """
@@ -70,4 +73,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-    print()
