@@ -49,6 +49,62 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_show(self, arg):
+       """
+       print string representation of instance based on class and id
+       """
+       arg_list = []
+       if not arg:
+           print("** class name missing **")
+           return
+       arg_list = arg.split()
+       if arg_list[0] in storage.my_classes.keys():
+           if len(arg_list) < 2:
+               print ("** instance id missing **")
+               return
+           input_key = arg_list[0] + "." + arg_list[1]
+           if input_key in storage.all():
+               print(storage.all()[input_key])
+           else:
+               print("** no instance found **")
+       else:
+           print("** class doesn't exist **")
+
+    def do_all(self, arg):
+        """
+        prints all objects of a certain type, or all objects if none specified
+        """
+        if not arg:
+            for i in storage.all():
+                print(storage.all()[i])
+        elif arg in storage.my_classes.keys():
+            for i in storage.all():
+                if i[0: i.index('.')] == arg:
+                    print(storage.all()[i])
+        else:
+            print("** class doesn't exist **")
+
+    def do_destroy(self, arg):
+       arg_list = []
+       if not arg:
+           print("** class name missing **")
+           return
+       arg_list = arg.split()
+       if arg_list[0] in storage.my_classes.keys():
+           if len(arg_list) < 2:
+               print ("** instance id missing **")
+               return
+           input_key = arg_list[0] + "." + arg_list[1]
+           if input_key in storage.all():
+               del storage.all()[input_key]
+               storage.save()
+           else:
+               print("** no instance found **")
+       else:
+           print("** class doesn't exist **")
+
+    def do_update(self, arg):
+        
     def emptyline(self):
         """
         Empties the prompt
