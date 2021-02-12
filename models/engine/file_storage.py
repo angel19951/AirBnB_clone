@@ -48,9 +48,11 @@ class FileStorage:
             with open(self.__file_path, 'r') as file:
                 aux_dict = json.load(file)
                 for k, str_obj in aux_dict.items():
-                    print("here")
-                    model = my_classes[str_obj[0: str_obj.index('.')]]
-                    obj_dict = {k, model(json.load(str_obj))}
+                   # print("here")
+                    model = self.my_classes[k[0: k.index('.')]]
+                    obj_dict[k] = model(str_obj.items())
+                    #print(self.my_classes[k[0: k.index('.')]])
+                    #print(type(obj_dict))
                 self.__objects = obj_dict
-        except:
+        except FileNotFoundError:
             pass
