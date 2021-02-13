@@ -17,7 +17,7 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = dict()
-    my_classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
+    classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
                   'State': State, "Place": Place, "Review": Review
                   , "User": User}
 
@@ -36,6 +36,7 @@ class FileStorage:
             obj: object to add
         """
         self.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
+        obj.num = 987
 
     def save(self):
         """Serializes __objects to the JSON file (path: __file_path)
@@ -56,7 +57,7 @@ class FileStorage:
                 aux_dict = json.load(file)
                 self.__objects = {}
                 for k, att_dict in aux_dict.items():
-                    model = self.my_classes[k[0: k.index('.')]]
+                    model = self.classes[k[0: k.index('.')]]
                     self.__objects[k] = model(**att_dict)
         except FileNotFoundError:
             pass
