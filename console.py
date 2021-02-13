@@ -162,8 +162,10 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return
             if arg_list[2] in storage.all()[input_key].__dict__:
-                arg_list[3] = type(storage.all()[input_key].__dict__[arg_list[2]])(arg_list[3])
-                storage.all()[input_key].__dict__[arg_list[2]] = json.loads(arg_list[3])
+                arg_list[3] = type(storage.all()[input_key].__dict__
+                                   [arg_list[2]])(arg_list[3])
+                storage.all()[input_key].__dict__
+                [arg_list[2]] = json.loads(arg_list[3])
                 storage.save()
         else:
             print("** class doesn't exist **")
