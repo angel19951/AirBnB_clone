@@ -16,7 +16,7 @@ class BaseModel():
     """
     BaseModel class
     Attributes:
-    id (UUID): string holdin UUID
+    id (UUID): string holding UUID
     created_at (datetime): date created
     updated_at (datetime): date updated
     """
@@ -28,19 +28,18 @@ class BaseModel():
         my_number (int): id number
         """
         if len(kwargs) == 0:
-
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
         else:
+            del kwargs['__class__']
+            kwargs['created_at'] = datetime.strptime(
+                    kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
+            kwargs['updated_at'] = datetime.strptime(
+                    kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
             for k, v in kwargs.items():
-                self.__dict__[k] = v
-            del self.__dict__['__class__']
-            self.__dict__['created_at'] = datetime.strptime(
-                    self.__dict__['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
-            self.__dict__['updated_at'] = datetime.strptime(
-                    self.__dict__['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
+                setattr(self, k, v)
 
     def __str__(self):
         """
@@ -53,7 +52,7 @@ class BaseModel():
         """
         Saves an objec to  a JSON file
         """
-        self.updated_at = datetime.now().isoformat()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
