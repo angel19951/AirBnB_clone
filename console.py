@@ -16,10 +16,11 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
+    """
     def do_help(self, arg):
-        """
+
         Prints a help command to help user navigate
-        """
+
         if not arg:
             print()
             print("Documented commands (type help <topic>):")
@@ -36,6 +37,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             if sys.flags.optimize >= 2:
                 return
+    """
 
     @staticmethod
     def val_get_key(arg):
@@ -63,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not arg:
             print("** class name missing **")
-        elif arg in storage.classes.keys():
+        elif arg in storage.classes:
             new_obj = storage.classes[arg]()
             storage.new(new_obj)
             storage.save()
@@ -100,12 +102,12 @@ class HBNBCommand(cmd.Cmd):
         prints all objects of a certain type, or all objects if none specified
         """
         if not arg:
-            for i in storage.all():
-                print(storage.all()[i])
+            for i in storage.all().values():
+                print(i)
         elif arg in storage.classes:
-            for i in storage.all():
-                if i[0: i.index('.')] == arg:
-                    print(storage.all()[i])
+            for k, v in storage.all().items():
+                if k[0: k.index('.')] == arg:
+                    print(v)
         else:
             print("** class doesn't exist **")
 
