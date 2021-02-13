@@ -121,6 +121,9 @@ class HBNBCommand(cmd.Cmd):
         print()
 
     def do_destroy(self, arg):
+        """
+        Deletes an instance based on the Class and the ID
+        """
         key = HBNBCommand.val_get_key(arg)
         if key:
             del storage.all()[key]
@@ -175,12 +178,6 @@ class HBNBCommand(cmd.Cmd):
             self.lastcmd = ""
             return self.onecmd("\n")
 
-    def postloop(self):
-        """
-        Print empty line post cmd loop
-        """
-        print(end="")
-
     def do_quit(self, arg):
         """
         Exits the program using quit command
@@ -198,7 +195,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Exits the program using EOF command
         """
-        print("EOF")
+        print()
         return True
 
     def help_EOF(self):
