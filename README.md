@@ -10,7 +10,7 @@ Same as our previous _Shell Project_, the __console__ is a command interpreter f
 ### Instructions:
 Once the repo has been pulled...
 
-To start your console execute the __console.py__ and press enter file as shown:
+To start your console execute the __console.py__ file and press enter as shown:
 ```bash
 $ ./console.py
 (hbnb)
