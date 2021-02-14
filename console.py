@@ -115,10 +115,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 att_name, value = l_arg[2:4]
+
                 if value[0] == '"':
+                    value = " ".join(l_arg[3:])
                     value = value[1:]
-                    if value[-1] == '"':
-                        value = value[0:-1]
+                    if '"' in value:
+                        value = value[0: value.index('"')]
                 obj = storage.all()[key]
                 if att_name in obj.__dict__:
                     cls = type(obj.__dict__[att_name])
