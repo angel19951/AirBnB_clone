@@ -4,6 +4,7 @@ Place class
 """
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """
     place subclass of BaseModel

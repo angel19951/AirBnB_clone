@@ -4,6 +4,7 @@ city class
 """
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """
     user subclass of BaseModel

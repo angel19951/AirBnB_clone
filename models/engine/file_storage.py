@@ -18,8 +18,8 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = dict()
     classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
-                  'State': State, "Place": Place, "Review": Review
-                  , "User": User}
+               'State': State, "Place": Place, "Review": Review,
+               "User": User}
 
     def __init__(self, *args, **kwargs):
         """Initializer
