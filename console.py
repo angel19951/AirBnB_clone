@@ -3,11 +3,11 @@
 This module is the console for the AirBnB clone
 """
 import cmd
-import sys
-import os
 import json
 from models import storage
 from models.base_model import BaseModel
+import re
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -16,11 +16,12 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    def you(self, arg):
+    def do_you(self, arg):
         """CMD use for testing the Console
         second line
         """
-        print("Eureka")
+        self.onecmd("all")
+        print(arg)
 
     @staticmethod
     def val_get_key(arg):
@@ -77,13 +78,15 @@ class HBNBCommand(cmd.Cmd):
         was specified.
 
         Usage: all <class name>
+             : <class name>.all()
         """
+        cls = arg.split()
         if not arg:
             for i in storage.all().values():
                 print(i)
-        elif arg in storage.classes:
+        elif cls[0] in storage.classes:
             for k, v in storage.all().items():
-                if k[0: k.index('.')] == arg:
+                if k[0: k.index('.')] == cls[0]:
                     print(v)
         else:
             print("** class doesn't exist **")
@@ -151,28 +154,50 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    """
-    def do_help(self, arg):
+    patterns = {'all': re.compile('\(\)'),
+                'count': re.compile('\(\)')}
 
-        Prints a help command to help user navigate
+    """-------------ADVANCE TASKS-----------------"""
 
+    def default(self, arg):
+        """
+        Overwtrites the default method when an input to the prompt
+        is not reconognized, validates
+        """
+        if '.' in arg:
+            cls = arg[0:arg.index('.')]
+            if cls in storage.classes and '(' in arg and ')' in arg:
+                cmnd = arg[arg.index('.') + 1: arg.index('(')]
+                if cmnd in self.patterns:
+                    to_match = arg[arg.index('(') + 1: arg.index(')')]
+                    if to_match:
+                        match = self.patterns[cmnd].match(to_match)
+                        if match:
+                            self.onecmd(' '.join([cmnd, cls, match.group()]))
+                            return
+                    elif arg.index('(') < arg.index(')'):
+                        self.onecmd(cmnd + ' ' + cls)
+                        return
+
+        print("*** Unknown syntax: " + arg)
+
+    def do_count(self, arg):
+        """
+        Retrieves the number of instances of a class.
+
+        Usage: count <class name>
+             : <class name>.count()
+        """
+        args = arg.split()
         if not arg:
-            print()
-            print("Documented commands (type help <topic>):")
-            print("=========================================")
-            print("EOF " + " help " + " quit")
-            print("create " + " update " + " destroy ")
-            print("update " + "all")
-            print()
-        try:
-            topic = getattr(self, "help_" + arg)
-            return topic()
-        except AttributeError:
-            pass
-        else:
-            if sys.flags.optimize >= 2:
-                return
-    """
+            print("** class name missing **")
+        elif args[0] in storage.classes:
+            cnt = 0
+            for k in storage.all().keys():
+                if k[0: k.index('.')] == args[0]:
+                    cnt += 1
+            print(cnt)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
