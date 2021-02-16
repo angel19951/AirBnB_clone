@@ -32,6 +32,12 @@ class TestFileStorage(unittest.TestCase):
         """
         self.my_model = BaseModel()
 
+    def testInstance(self):
+        """
+        Test that a file is an instance
+        """
+        self.assertIsInstance(self.my_model, BaseModel)
+
     def tearDown(self):
         """
         Deletes an instance
