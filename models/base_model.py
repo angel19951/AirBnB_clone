@@ -1,14 +1,11 @@
 #!/usr/bin/python3
+"""
+This module contains the BaseModel class from which all instances
+of the HBNAirBnB project are to inherit.
+"""
 import uuid
 from datetime import datetime
 import models
-"""
-This module contains the BaseModel class
-Attributes:
-id (UUID): string with UUID
-created_at (datetime): date and time created
-updated_at (datetime): date and time updated
-"""
 
 
 class BaseModel():
