@@ -5,6 +5,7 @@ This module contains unit test for the FileStorage class
 from models import storage
 from models.base_model import BaseModel
 from models.city import City
+from models.engine.file_storage import FileStorage
 import unittest
 import pep8
 import json
@@ -36,6 +37,12 @@ class TestFileStorage(unittest.TestCase):
         """
         self.my_model = BaseModel()
         self.my_city = City()
+
+    def test_docstring(self):
+        """
+        Test docstring
+        """
+        self.assertIsNotNone(FileStorage.__doc__)
 
     def testInstance(self):
         """
