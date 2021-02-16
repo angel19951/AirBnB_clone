@@ -76,7 +76,6 @@ class TestFileStorage(unittest.TestCase):
         """
         flag = 0
         my_obj = dict()
-        os.remove(file)
         self.my_model.save()
         model_id = self.my_model.id
         storage.reload()
