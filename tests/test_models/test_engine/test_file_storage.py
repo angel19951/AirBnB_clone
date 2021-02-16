@@ -32,6 +32,12 @@ class TestFileStorage(unittest.TestCase):
         """
         self.my_model = BaseModel()
 
+    def tearDown(self):
+        """
+        Deletes an instance
+        """
+        del self.my_model
+
     def testNew(self):
         """
         Test new method to validate it run correctly
