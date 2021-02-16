@@ -2,7 +2,6 @@
 import uuid
 from datetime import datetime
 import models
-
 """
 This module contains the BaseModel class
 Attributes:
@@ -60,8 +59,8 @@ class BaseModel():
         returns a dictionary with all keys and values of __dict__
         also adds key class to the dictionary with class name
         """
-        dict = self.__dict__.copy()
-        dict["__class__"] = self.__class__.__name__
-        dict["created_at"] = self.created_at.isoformat()
-        dict["updated_at"] = self.updated_at.isoformat()
-        return dict
+        adict = self.__dict__.copy()
+        adict["__class__"] = self.__class__.__name__
+        adict["created_at"] = self.created_at.isoformat()
+        adict["updated_at"] = self.updated_at.isoformat()
+        return adict
