@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-city class
+Defines User class that inherits from BaseModel
 """
 from models.base_model import BaseModel
 
