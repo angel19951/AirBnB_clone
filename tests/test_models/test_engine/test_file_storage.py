@@ -74,10 +74,17 @@ class TestFileStorage(unittest.TestCase):
         """
         Test reload method to validate it works correctly
         """
-        self.file_reload = storage.reload()
+        flag = 0
+        os.remove(file)
+        self.my_model.save()
+        model_id = self.my_model.id
         storage.reload()
-        self.file_save = storage.reload()
-        self.assertEqual(self.file_reload, self.file_save)
+        my_objs = storage.all()
+        for key, val in my_objs.items():
+            if model_id in key:
+                if type(val).__name__ == "BaseModel":
+                    flag = 1
+        self.assertTrue(flag)
 
 if __name__ == '__main__':
     unittest.main()
