@@ -71,3 +71,6 @@ class TestFileStorage(unittest.TestCase):
         storage.reload()
         self.file_save = storage.reload()
         self.assertEqual(self.file_reload, self.file_save)
+
+if __name__ == '__main__':
+    unittest.main()
