@@ -9,6 +9,8 @@ import pep8
 import json
 import os
 
+file = 'file.json'
+
 
 class TestFileStorage(unittest.TestCase):
     """
@@ -64,8 +66,9 @@ class TestFileStorage(unittest.TestCase):
         """
         Test save if it creates a json file
         """
-        storage.save()
-        self.assertTrue(os.path.isfile("file.json"))
+        os.remove(file)
+        self.my_model.save()
+        self.assertTrue(os.path.isfile(file))
 
     def testReload(self):
         """
