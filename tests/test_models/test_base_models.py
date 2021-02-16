@@ -61,6 +61,7 @@ class TestBaseClass(unittest.TestCase):
         comparing two intances saved/updated datetime
         to validate if update_at datetime is unique
         """
+        self.save_obj = BaseModel()
         self.before_save = self.save_obj.updated_at
         self.save_obj.save()
         self.after_save = self.save_obj.updated_at
