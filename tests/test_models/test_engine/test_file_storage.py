@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 import unittest
 import pep8
 import json
+import os
 
 
 class TestFileStorage(unittest.TestCase):
@@ -56,16 +57,15 @@ class TestFileStorage(unittest.TestCase):
         """
         Test all method to validate it runs correctly
         """
-        self.my_dict = storage.all()
-        self.assertEqual(type(self.my_dict),  dict)
+        my_dict = storage.all()
+        self.assertEqual(type(my_dict),  dict)
 
     def testSave(self):
         """
-        Test save method to validate it works correctly
+        Test save if it creates a json file
         """
-        dict_save = storage.all().copy()
         storage.save()
-        self.assertEqual(dict_save, storage.all())
+        self.assertTrue(os.path.isfile("file.json"))
 
     def testReload(self):
         """
