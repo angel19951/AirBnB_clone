@@ -61,10 +61,9 @@ class TestBaseClass(unittest.TestCase):
         comparing two intances saved/updated datetime
         to validate if update_at datetime is unique
         """
-        self.save_obj = BaseModel()
-        self.before_save = self.save_obj.updated_at
-        self.save_obj.save()
-        self.after_save = self.save_obj.updated_at
+        self.before_save = self.new_instance_1.updated_at
+        self.new_instance_1.save()
+        self.after_save = self.new_instance_1.updated_at
         self.assertNotEqual(self.before_save, self.after_save)
 
     def testUpdate(self):
@@ -72,10 +71,9 @@ class TestBaseClass(unittest.TestCase):
         checks if update method does not affect created_at date by
         comparing the different dates on the same file
         """
-        self.update_obj = BaseModel()
-        self.before_update = self.update_obj.created_at
-        self.update_obj.save()
-        self.after_update = self.update_obj.created_at
+        self.before_update = self.new_instance_2.created_at
+        self.new_instance_2.save()
+        self.after_update = self.new_instance_2.created_at
         self.assertEqual(self.before_update, self.after_update)
 
     def testDict(self):
@@ -83,14 +81,13 @@ class TestBaseClass(unittest.TestCase):
         Tests that method retuns a dictionary by
         comparing a predefined one to entered one
         """
-        self.my_model = BaseModel()
-        self.dictionary = dict(self.my_model.__dict__)
+        self.dictionary = dict(self.new_instance_1.__dict__)
         self.dictionary['__class__'] = "BaseModel"
         self.dictionary['created_at'] =\
             self.dictionary['created_at'].isoformat()
         self.dictionary['updated_at'] =\
             self.dictionary['updated_at'].isoformat()
-        self.assertDictEqual(self.dictionary, self.my_model.to_dict())
+        self.assertDictEqual(self.dictionary, self.new_instance_1.to_dict())
 """
     def testId_ToStr(self):
 """
