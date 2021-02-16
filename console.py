@@ -16,13 +16,6 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    def do_you(self, arg):
-        """CMD use for testing the Console
-        second line
-        """
-        self.onecmd("all")
-        print(arg)
-
     @staticmethod
     def val_get_key(arg):
         """
@@ -32,16 +25,20 @@ class HBNBCommand(cmd.Cmd):
         l_arg = arg.split()
         cnt = len(l_arg)
         key = None
+        tmp_key = None
         if not arg:
             print("** class name missing **")
         elif l_arg[0] not in storage.classes:
             print("** class doesn't exist **")
         elif cnt < 2:
             print("** instance id missing **")
-        elif '.'.join(l_arg[0:2]) not in storage.all():
-            print("** no instance found **")
         else:
-            key = '.'.join(l_arg[0:2])
+            l_arg[1] = l_arg[1].strip('"')
+            tmp_key = '.'.join(l_arg[0:2])
+            if tmp_key not in storage.all():
+                print("** no instance found **")
+            else:
+                key = tmp_key
         return key
 
     def do_create(self, arg):
@@ -154,8 +151,10 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    patterns = {'all': re.compile('\(\)'),
-                'count': re.compile('\(\)')}
+    patterns = {'all': re.compile('.*'),
+                'count': re.compile('.*'),
+                'show': re.compile('.*'),
+                'destroy': re.compile('.*')}
 
     """-------------ADVANCE TASKS-----------------"""
 
