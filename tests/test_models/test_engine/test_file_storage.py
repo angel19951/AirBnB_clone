@@ -4,6 +4,7 @@ This module contains unit test for the FileStorage class
 """
 from models import storage
 from models.base_model import BaseModel
+from models.city import City
 import unittest
 import pep8
 import json
@@ -34,12 +35,19 @@ class TestFileStorage(unittest.TestCase):
         Initializes an instance
         """
         self.my_model = BaseModel()
+        self.my_city = City()
 
     def testInstance(self):
         """
         Test that a file is an instance
         """
         self.assertIsInstance(self.my_model, BaseModel)
+
+    def testCityInstance(self):
+        """
+        Test that a object is an instance
+        """
+        self.assertIsInstance(self.my_city, BaseModel)
 
     def tearDown(self):
         """
