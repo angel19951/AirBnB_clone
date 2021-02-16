@@ -75,11 +75,12 @@ class TestFileStorage(unittest.TestCase):
         Test reload method to validate it works correctly
         """
         flag = 0
+        my_obj = dict()
         os.remove(file)
         self.my_model.save()
         model_id = self.my_model.id
         storage.reload()
-        my_objs = storage.all()
+        my_objs = storage.all().copy()
         for key, val in my_objs.items():
             if model_id in key:
                 if type(val).__name__ == "BaseModel":
