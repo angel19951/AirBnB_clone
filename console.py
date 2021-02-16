@@ -33,8 +33,9 @@ class HBNBCommand(cmd.Cmd):
         elif cnt < 2:
             print("** instance id missing **")
         else:
-            l_arg[1] = l_arg[1].strip('"')
+            l_arg[1] = l_arg[1].strip('",')
             tmp_key = '.'.join(l_arg[0:2])
+            print(tmp_key)
             if tmp_key not in storage.all():
                 print("** no instance found **")
             else:
@@ -108,19 +109,15 @@ class HBNBCommand(cmd.Cmd):
         """
         key = HBNBCommand.val_get_key(arg)
         if key:
-            l_arg = arg.split()
+            l_arg = shlex.split(arg)
             if len(l_arg) < 3:
                 print("** attribute name missing **")
             elif len(l_arg) < 4:
                 print("** value missing **")
             else:
+                for i in range(2, len(l_arg)):
+                    l_arg[i] = l_arg[i].strip('",')
                 att_name, value = l_arg[2:4]
-
-                if value[0] == '"':
-                    value = " ".join(l_arg[3:])
-                    value = value[1:]
-                    if '"' in value:
-                        value = value[0: value.index('"')]
                 obj = storage.all()[key]
                 if att_name in obj.__dict__:
                     cls = type(obj.__dict__[att_name])
@@ -151,10 +148,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    patterns = {'all': re.compile('.*'),
-                'count': re.compile('.*'),
-                'show': re.compile('.*'),
-                'destroy': re.compile('.*')}
+    topic = ['all', 'count', 'show', 'destroy', 'update']
 
     """-------------ADVANCE TASKS-----------------"""
 
@@ -167,13 +161,11 @@ class HBNBCommand(cmd.Cmd):
             cls = arg[0:arg.index('.')]
             if cls in storage.classes and '(' in arg and ')' in arg:
                 cmnd = arg[arg.index('.') + 1: arg.index('(')]
-                if cmnd in self.patterns:
-                    to_match = arg[arg.index('(') + 1: arg.index(')')]
-                    if to_match:
-                        match = self.patterns[cmnd].match(to_match)
-                        if match:
-                            self.onecmd(' '.join([cmnd, cls, match.group()]))
-                            return
+                if cmnd in self.topic:
+                    params = arg[arg.index('(') + 1: arg.index(')')]
+                    if params:
+                        self.onecmd(' '.join([cmnd, cls, params]))
+                        return
                     elif arg.index('(') < arg.index(')'):
                         self.onecmd(cmnd + ' ' + cls)
                         return
