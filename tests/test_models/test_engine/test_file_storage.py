@@ -48,10 +48,9 @@ class TestFileStorage(unittest.TestCase):
         """
         Test new method to validate it run correctly
         """
-        self.all_storage = storage.all()
-        storage.new(self.my_model)
-        self.new_dict = storage.all()
-        self.assertEqual(self.all_storage, self.new_dict)
+        new_dict = storage.all().copy()
+        storage.new(BaseModel())
+        self.assertNotEqual(new_dict, storage.all())
 
     def testAll(self):
         """
