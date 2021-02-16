@@ -36,7 +36,6 @@ class FileStorage:
             obj: object to add
         """
         self.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
-        obj.num = 987
 
     def save(self):
         """Serializes __objects to the JSON file (path: __file_path)
