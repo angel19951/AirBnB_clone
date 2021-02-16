@@ -63,10 +63,9 @@ class TestFileStorage(unittest.TestCase):
         """
         Test save method to validate it works correctly
         """
-        self.dict_save = storage.save()
+        dict_save = storage.all().copy()
         storage.save()
-        self.new_save = storage.save()
-        self.assertEqual(self.dict_save, self.new_save)
+        self.assertEqual(dict_save, storage.all())
 
     def testReload(self):
         """
