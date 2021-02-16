@@ -1,15 +1,11 @@
 #!/usr/bin/python3
+"""
+This module contains the BaseModel class from which all instances
+of the HBNAirBnB project are to inherit.
+"""
 import uuid
 from datetime import datetime
 import models
-
-"""
-This module contains the BaseModel class
-Attributes:
-id (UUID): string with UUID
-created_at (datetime): date and time created
-updated_at (datetime): date and time updated
-"""
 
 
 class BaseModel():
@@ -45,8 +41,8 @@ class BaseModel():
         """
         String rep of a class
         """
-        return "[" + self.__class__.__name__ + "] " + "(" + self.id + ")" +\
-            str(self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
+                                     self.__dict__)
 
     def save(self):
         """
@@ -60,8 +56,8 @@ class BaseModel():
         returns a dictionary with all keys and values of __dict__
         also adds key class to the dictionary with class name
         """
-        dict = self.__dict__.copy()
-        dict["__class__"] = self.__class__.__name__
-        dict["created_at"] = self.created_at.isoformat()
-        dict["updated_at"] = self.updated_at.isoformat()
-        return dict
+        adict = self.__dict__.copy()
+        adict["__class__"] = self.__class__.__name__
+        adict["created_at"] = self.created_at.isoformat()
+        adict["updated_at"] = self.updated_at.isoformat()
+        return adict
