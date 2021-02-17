@@ -3,7 +3,6 @@
 This module contains unit test for the FileStorage class
 """
 from models import storage
-from models.my_models import classes
 from models.base_model import BaseModel
 from models.city import City
 from models.engine.file_storage import FileStorage
