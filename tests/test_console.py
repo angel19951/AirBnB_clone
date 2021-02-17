@@ -70,5 +70,12 @@ class TestConsole(unittest.TestCase):
         assert HBNBCommand(my_console.onecmd("update") ==
                            "** class name missing **")
 
+    def testDocString(self):
+        """
+        checks if console properly documented
+        """
+        self.assertIsNot(HBNBCommand.__doc__, None,\
+                         "console.py needs a docstring")
+
 if __name__ == '__main__':
     unittest.main()
