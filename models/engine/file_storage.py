@@ -46,8 +46,6 @@ class FileStorage:
                 dict_add[k] = v.to_dict()
             json.dump(dict_add, file)
 
-            """json.dump(self.__objects, file)"""
-
     def reload(self):
         """Deserializes the JSON file to __objects
         """
