@@ -10,6 +10,7 @@ import unittest
 import pep8
 from models import classes
 from unittest.mock import patch, create_autospec
+import os
 
 
 class TestConsole(unittest.TestCase):
@@ -105,6 +106,18 @@ class TestConsole(unittest.TestCase):
         """
         self.assertIsNot(HBNBCommand.__doc__, None,
                          "console.py needs a docstring")
+        self.assertTrue(len(HBNBCommand.do_create.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.val_get_key.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_show.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_all.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_destroy.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_update.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.emptyline.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_quit.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_EOF.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.default.__doc__) > 1)
+        self.assertTrue(len(HBNBCommand.do_count.__doc__) > 1)
+
 
 if __name__ == '__main__':
     unittest.main()
