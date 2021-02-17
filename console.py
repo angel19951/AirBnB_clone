@@ -109,17 +109,24 @@ class HBNBCommand(cmd.Cmd):
             l_arg = shlex.split(arg)
             if len(l_arg) < 3:
                 print("** attribute name missing **")
-            elif len(l_arg) < 4:
+            elif len(l_arg) < 4 and '{' not in l_arg[2]:
                 print("** value missing **")
             else:
-                for i in range(2, len(l_arg)):
-                    l_arg[i] = l_arg[i].strip('",')
-                att_name, value = l_arg[2:4]
                 obj = storage.all()[key]
-                if att_name in obj.__dict__:
-                    cls = type(obj.__dict__[att_name])
-                    value = cls(value)
-                setattr(obj, att_name, value)
+                if '{' in l_arg[2]:
+                    str_dic = arg[arg.index('{'): arg.index('}') + 1]
+                    str_dic = str_dic.replace('"', "'")
+                    adict = eval(str_dic)
+                    for k, v in adict.items():
+                        setattr(obj, k, v)
+                else:
+                    for i in range(2, len(l_arg)):
+                        l_arg[i] = l_arg[i].strip('",')
+                    att_name, value = l_arg[2:4]
+                    if att_name in obj.__dict__:
+                        cls = type(obj.__dict__[att_name])
+                        value = cls(value)
+                        setattr(obj, att_name, value)
                 obj.save()
 
     def emptyline(self):
