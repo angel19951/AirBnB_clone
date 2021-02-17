@@ -2,7 +2,7 @@
 """This module recreates a BaseModel from another one by using a
 dictionary representation."""
 import json
-from models.my_models import classes
+from .. import classes
 
 
 class FileStorage:

@@ -5,7 +5,7 @@ This module is the console for the AirBnB clone
 import cmd
 import shlex
 from models import storage
-from models.my_models import classes
+from models import classes
 
 
 class HBNBCommand(cmd.Cmd):
