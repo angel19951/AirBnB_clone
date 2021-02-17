@@ -28,6 +28,7 @@ class BaseModel():
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
+            models.storage.save()
         else:
             del kwargs['__class__']
             kwargs['created_at'] = datetime.strptime(
