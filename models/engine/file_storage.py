@@ -2,13 +2,7 @@
 """This modul recreates a BaseModel from another one by using a
 dictionary representation."""
 import json
-from models.base_model import BaseModel
-from models.amenity import Amenity
-from models.city import City
-from models.state import State
-from models.place import Place
-from models.review import Review
-from models.user import User
+from models.my_models import classes
 
 
 class FileStorage:
@@ -17,9 +11,6 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = dict()
-    classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
-               'State': State, "Place": Place, "Review": Review,
-               "User": User}
 
     def __init__(self, *args, **kwargs):
         """Initializer
@@ -54,7 +45,7 @@ class FileStorage:
                 aux_dict = json.load(file)
                 self.__objects = {}
                 for k, att_dict in aux_dict.items():
-                    model = self.classes[k[0: k.index('.')]]
+                    model = classes[k[0: k.index('.')]]
                     self.__objects[k] = model(**att_dict)
         except FileNotFoundError:
             pass

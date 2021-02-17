@@ -3,11 +3,9 @@
 This module is the console for the AirBnB clone
 """
 import cmd
-import json
-from models import storage
-from models.base_model import BaseModel
-import re
 import shlex
+from models import storage
+from models.my_models import classes
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,14 +26,13 @@ class HBNBCommand(cmd.Cmd):
         tmp_key = None
         if not arg:
             print("** class name missing **")
-        elif l_arg[0] not in storage.classes:
+        elif l_arg[0] not in classes:
             print("** class doesn't exist **")
         elif cnt < 2:
             print("** instance id missing **")
         else:
             l_arg[1] = l_arg[1].strip('",')
             tmp_key = '.'.join(l_arg[0:2])
-            print(tmp_key)
             if tmp_key not in storage.all():
                 print("** no instance found **")
             else:
@@ -51,8 +48,8 @@ class HBNBCommand(cmd.Cmd):
         """
         if not arg:
             print("** class name missing **")
-        elif arg in storage.classes:
-            new_obj = storage.classes[arg]()
+        elif arg in classes:
+            new_obj = classes[arg]()
             storage.new(new_obj)
             storage.save()
             print(new_obj.id)
@@ -82,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             for i in storage.all().values():
                 print(i)
-        elif cls[0] in storage.classes:
+        elif cls[0] in classes:
             for k, v in storage.all().items():
                 if k[0: k.index('.')] == cls[0]:
                     print(v)
@@ -159,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if '.' in arg:
             cls = arg[0:arg.index('.')]
-            if cls in storage.classes and '(' in arg and ')' in arg:
+            if cls in classes and '(' in arg and ')' in arg:
                 cmnd = arg[arg.index('.') + 1: arg.index('(')]
                 if cmnd in self.topic:
                     params = arg[arg.index('(') + 1: arg.index(')')]
@@ -182,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not arg:
             print("** class name missing **")
-        elif args[0] in storage.classes:
+        elif args[0] in classes:
             cnt = 0
             for k in storage.all().keys():
                 if k[0: k.index('.')] == args[0]:
