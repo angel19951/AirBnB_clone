@@ -3,11 +3,13 @@
 Unit testing for console.py
 """
 import console
+from console import HBNBCommand
 import unittest
 import pep8
+import cmd
 
 
-class TestConsole(unittest.TestCase):
+class TestConsole(cmd.Cmd):
     """
     test console code with unit testing
     """
@@ -40,6 +42,20 @@ class TestConsole(unittest.TestCase):
         """
         my_console = self.create()
         self.assertTrue(console.onecmd("quit"))
+
+    def testDestroy(self):
+        """
+        checks if destroy command is valid
+        """
+        my_console = self.create()
+        self.assertTrue(console.onecmd("destroy"))
+
+    def testUpdate(self):
+        """
+        checks if update command is valid
+        """
+        my_console = self.create()
+        self.assertTrue(console.onecmd("update"))
 
 if __name__ == '__main__':
     unittest.main()
