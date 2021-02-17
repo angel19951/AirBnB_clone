@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This modul recreates a BaseModel from another one by using a
+"""This module recreates a BaseModel from another one by using a
 dictionary representation."""
 import json
 from models.my_models import classes
@@ -11,10 +11,6 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = dict()
-
-    def __init__(self, *args, **kwargs):
-        """Initializer
-        """
 
     def all(self):
         """Returns the dictionary
