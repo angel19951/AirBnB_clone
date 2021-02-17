@@ -51,6 +51,7 @@ class TestPlace(unittest.TestCase):
         Checks if save method is working correctly
         """
         self.save_place = Place()
+        self.save_place.save()
         self.before_save = self.save_place.updated_at
         self.save_place.save()
         self.after_save = self.save_place.updated_at
