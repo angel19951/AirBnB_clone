@@ -2,6 +2,9 @@
 """
 Unit testing for console.py
 """
+from console import HBNBCommand
+import sys
+import io
 import console
 import unittest
 import pep8
@@ -21,6 +24,13 @@ class TestConsole(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
+    def testHelp(self):
+        """
+        Test the help command
+        """
+        input = 'help'
+        assert HBNBCommand(input)
+
     def create(self):
         """
         creates a console instance
@@ -32,14 +42,14 @@ class TestConsole(unittest.TestCase):
         checks if EOF command is valid
         """
         my_console = self.create()
-        self.assertTrue(console.onecmd("EOF"))
+        self.assertTrue(my_console.onecmd("EOF"))
 
     def testQuit(self):
         """
         checks if quit command is valid
         """
         my_console = self.create()
-        self.assertTrue(console.onecmd("quit"))
+        self.assertTrue(my_console.onecmd("quit"))
 
 if __name__ == '__main__':
     unittest.main()
