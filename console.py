@@ -126,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
                     if att_name in obj.__dict__:
                         cls = type(obj.__dict__[att_name])
                         value = cls(value)
-                        setattr(obj, att_name, value)
+                    setattr(obj, att_name, value)
                 obj.save()
 
     def emptyline(self):
