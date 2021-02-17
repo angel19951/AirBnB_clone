@@ -29,8 +29,10 @@ class TestConsole(unittest.TestCase):
         """
         Test the help command
         """
-        my_input = 'help'
-        assert HBNBCommand(input)
+        assert(HBNBCommand().onecmd("help")) ==\
+            "Documented commands (type help <topic>): \n" +\
+            "========================================\n" +\
+            "EOF  all  count  create  destroy  help  quit  show  update"
 
     def create(self):
         """
@@ -43,7 +45,7 @@ class TestConsole(unittest.TestCase):
         checks if EOF command is valid
         """
         my_console = self.create()
-        assert HBNBCommand(my_console.onecmd("EOF"))
+        assert HBNBCommand().onecmd("EOF")
 
     def testQuit(self):
         """
