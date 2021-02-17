@@ -21,5 +21,25 @@ class TestConsole(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
+    def create(self):
+        """
+        creates a console instance
+        """
+        return HBNBCommand()
+
+    def testEOF(self):
+        """
+        checks if EOF command is valid
+        """
+        my_console = self.create()
+        self.assertTrue(console.onecmd("EOF"))
+
+    def testQuit(self):
+        """
+        checks if quit command is valid
+        """
+        my_console = self.create()
+        self.assertTrue(console.onecmd("quit"))
+
 if __name__ == '__main__':
     unittest.main()
