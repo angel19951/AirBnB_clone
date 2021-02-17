@@ -21,9 +21,9 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = dict()
     """classes = classesGlb"""
-    classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
+   """ classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
                'State': State, "Place": Place, "Review": Review,
-               "User": User}
+               "User": User}"""
 
     def __init__(self, *args, **kwargs):
         """Initializer
