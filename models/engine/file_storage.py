@@ -9,6 +9,9 @@ from models.state import State
 from models.place import Place
 from models.review import Review
 from models.user import User
+classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
+               'State': State, "Place": Place, "Review": Review,
+               "User": User}
 
 
 class FileStorage:
@@ -17,9 +20,9 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = dict()
-    classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
+    """classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
                'State': State, "Place": Place, "Review": Review,
-               "User": User}
+               "User": User}"""
 
     def __init__(self, *args, **kwargs):
         """Initializer
