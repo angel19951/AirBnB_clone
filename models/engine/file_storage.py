@@ -9,9 +9,9 @@ from models.state import State
 from models.place import Place
 from models.review import Review
 from models.user import User
-"""classesGlb = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
+classes = {'BaseModel': BaseModel, "Amenity": Amenity, "City": City,
                'State': State, "Place": Place, "Review": Review,
-               "User": User}"""
+               "User": User}
 
 
 class FileStorage:
