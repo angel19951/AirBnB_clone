@@ -6,13 +6,12 @@ from console import HBNBCommand
 import sys
 import io
 import console
-from console import HBNBCommand
 import unittest
 import pep8
 import cmd
 
 
-class TestConsole(cmd.Cmd):
+class TestConsole(unittest.TestCase):
     """
     test console code with unit testing
     """
@@ -44,28 +43,28 @@ class TestConsole(cmd.Cmd):
         checks if EOF command is valid
         """
         my_console = self.create()
-        self.assertTrue(my_console.onecmd("EOF"))
+        assert HBNBCommand(my_console.onecmd("EOF"))
 
     def testQuit(self):
         """
         checks if quit command is valid
         """
         my_console = self.create()
-        self.assertTrue(my_console.onecmd("quit"))
+        assert HBNBCommand(my_console.onecmd("quit"))
 
     def testDestroy(self):
         """
         checks if destroy command is valid
         """
         my_console = self.create()
-        self.assertTrue(console.onecmd("destroy"))
+        assert HBNBCommand(my_console.onecmd("destroy"))
 
     def testUpdate(self):
         """
         checks if update command is valid
         """
         my_console = self.create()
-        self.assertTrue(console.onecmd("update"))
+        assert HBNBCommand(my_console.onecmd("update"))
 
 if __name__ == '__main__':
     unittest.main()
