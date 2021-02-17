@@ -29,7 +29,7 @@ class TestConsole(unittest.TestCase):
         """
         Test the help command
         """
-        input = 'help'
+        my_input = 'help'
         assert HBNBCommand(input)
 
     def create(self):
@@ -57,14 +57,16 @@ class TestConsole(unittest.TestCase):
         checks if destroy command is valid
         """
         my_console = self.create()
-        assert HBNBCommand(my_console.onecmd("destroy"))
+        assert HBNBCommand(my_console.onecmd("destroy") ==
+                           "** class name missing **")
 
     def testUpdate(self):
         """
         checks if update command is valid
         """
         my_console = self.create()
-        assert HBNBCommand(my_console.onecmd("update"))
+        assert HBNBCommand(my_console.onecmd("update") ==
+                           "** class name missing **")
 
 if __name__ == '__main__':
     unittest.main()
