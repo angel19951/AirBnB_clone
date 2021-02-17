@@ -5,10 +5,13 @@ Unit testing for console.py
 from console import HBNBCommand
 import sys
 import io
+from io import StringIO
 import console
 import unittest
 import pep8
 import cmd
+from models import classes
+from unittest.mock import patch
 
 
 class TestConsole(unittest.TestCase):
@@ -24,15 +27,19 @@ class TestConsole(unittest.TestCase):
                                         'tests/test_console.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
-
+    """
     def testHelp(self):
-        """
+
         Test the help command
-        """
-        assert(HBNBCommand().onecmd("help")) ==\
-            "Documented commands (type help <topic>): \n" +\
-            "========================================\n" +\
-            "EOF  all  count  create  destroy  help  quit  show  update"
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help"),
+            self.assertEqual(f,
+                         "Documented commands (type help <topic>): \n" +
+                         "========================================\n" +
+                         "EOF  all  count  create  destroy  help  quit  show" +
+                         " update")
+    """
 
     def create(self):
         """
@@ -59,22 +66,43 @@ class TestConsole(unittest.TestCase):
         checks if destroy command is valid
         """
         my_console = self.create()
-        assert HBNBCommand(my_console.onecmd("destroy") ==
-                           "** class name missing **")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("destroy"))
+            self.assertEqual(f.getvalue(), "** class name missing **\n")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("destroy Jared"))
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("destroy BaseModel"))
+            self.assertEqual(f.getvalue(), "** instance id missing **\n")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("destroy BaseModel 555-ddd"))
+            self.assertEqual(f.getvalue(), "** no instance found **\n")
 
     def testUpdate(self):
         """
         checks if update command is valid
         """
+
         my_console = self.create()
-        assert HBNBCommand(my_console.onecmd("update") ==
-                           "** class name missing **")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("update"))
+            self.assertEqual(f.getvalue(), "** class name missing **\n")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("update Jared"))
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("update BaseModel"))
+            self.assertEqual(f.getvalue(), "** instance id missing **\n")
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            HBNBCommand(my_console.onecmd("update BaseModel 4444-"))
+            self.assertEqual(f.getvalue(), "** no instance found **\n")
 
     def testDocString(self):
         """
         checks if console properly documented
         """
-        self.assertIsNot(HBNBCommand.__doc__, None,\
+        self.assertIsNot(HBNBCommand.__doc__, None,
                          "console.py needs a docstring")
 
 if __name__ == '__main__':
