@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-# This modul recreates a BaseModel from another one by using a
-# dictionary representation.
+"""This modul recreates a BaseModel from another one by using a
+dictionary representation."""
 import json
 from models.base_model import BaseModel
 from models.amenity import Amenity
