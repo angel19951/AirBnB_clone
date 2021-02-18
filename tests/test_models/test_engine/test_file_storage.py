@@ -64,7 +64,7 @@ class TestFileStorage(unittest.TestCase):
 
     def testNew(self):
         """
-        Test new method to validate it run correctly
+        Test new method to validate that it runs correctly
         """
         new_dict = storage.all().copy()
         storage.new(BaseModel())
