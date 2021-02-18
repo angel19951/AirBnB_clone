@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """
         Creates a new class instance, if sucessful it prints the ID of
-        the new instance.
+        the new instance. Else, prints error message
 
         Usage: create <class_name>"
         """
