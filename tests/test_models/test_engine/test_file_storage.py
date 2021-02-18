@@ -87,7 +87,8 @@ class TestFileStorage(unittest.TestCase):
 
     def testReload(self):
         """
-        Test reload method to validate it works correctly
+        Uses basemodel to test if reload is
+        deserializing json correctly
         """
         flag = 0
         my_obj = dict()
