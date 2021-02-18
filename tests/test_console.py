@@ -85,7 +85,7 @@ class TestConsole(unittest.TestCase):
 
     def testUpdate(self):
         """
-        checks if update command is valid
+        checks if update command is valid.
         """
 
         my_console = self.session()
@@ -104,7 +104,8 @@ class TestConsole(unittest.TestCase):
 
     def testDocString(self):
         """
-        checks if console is properly documented
+        checks if console module is documented.
+        also checks all module methods for documentation
         """
         self.assertIsNot(HBNBCommand.__doc__, None,
                          "console.py needs a docstring")
