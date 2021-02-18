@@ -86,8 +86,8 @@ class TestConsole(unittest.TestCase):
     def testUpdate(self):
         """
         checks if update command is valid.
+        validates all method error messages
         """
-
         my_console = self.session()
         with patch('sys.stdout', new=StringIO()) as out:
             self.assertFalse(my_console.onecmd("update"))
