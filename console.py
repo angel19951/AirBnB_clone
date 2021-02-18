@@ -72,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """
         Prints all objects of a certain type, or all objects if no Class
-        was specified.
+        was specified. Prints error message if class invalid.
 
         Usage: all <class name>
              : <class name>.all()
