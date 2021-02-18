@@ -104,7 +104,9 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(out.getvalue(), "** no instance found **\n")
 
     def test_count(self):
-        """Test count command"""
+        """
+        test that count command returns appropriate val
+        """
         for k in classes.keys():
             count = 0
             for c in storage.all():
