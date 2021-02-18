@@ -120,6 +120,7 @@ Tested with python unit test, for how to stars, use and stability using command 
 ```bash
 $ python3 -m unittest discover test
 ```
+>> Note: All file/folders with name test... will be "discovered by the test"
 
 ## Contributors:
 * Gustavo Hornedo
