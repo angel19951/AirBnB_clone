@@ -52,7 +52,7 @@ class TestFileStorage(unittest.TestCase):
 
     def testCityInstance(self):
         """
-        Test that a object is an instance
+        Test that an object is an instance
         """
         self.assertIsInstance(self.my_city, BaseModel)
 
