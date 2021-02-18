@@ -102,7 +102,8 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """
         Updates an instance based on the Class name and ID by adding
-        or updating an attribute
+        or updating an attribute. Throws error message if attribute
+        name or value is missing
 
         Usage: update <class name> <id> <attribute name> "<attribute value>"
         """
