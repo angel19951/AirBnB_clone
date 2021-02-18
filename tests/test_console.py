@@ -128,6 +128,22 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as out:
             self.assertFalse(my_console.onecmd("update BaseModel 4444-"))
             self.assertEqual(out.getvalue(), "** no instance found **\n")
+        for cls in classes.keys():
+            obj = classes[cls]()
+            key = ".".join([cls, obj.id])
+            storage.all()[key] = obj
+            with patch('sys.stdout', new=StringIO()) as out:
+                cmnd = '{}.update("{}", "passwd", "too short")'
+                HBNBCommand().onecmd(cmnd.format(cls, obj.id))
+                self.assertTrue('passwd' in obj.__dict__)
+                if 'passwd' in obj.__dict__:
+                    self.assertEqual('too short', obj.__dict__['passwd'])
+            with patch('sys.stdout', new=StringIO()) as out:
+                cmnd = '{}.update("{}", "passwd", "1234")'
+                HBNBCommand().onecmd(cmnd.format(cls, obj.id))
+                self.assertTrue('passwd' in obj.__dict__)
+                if 'passwd' in obj.__dict__:
+                    self.assertEqual('1234', obj.__dict__['passwd'])
 
     def testCount(self):
         """
