@@ -3,6 +3,7 @@
 This module contains unit test for the BaseModel class
 """
 from models.base_model import BaseModel
+from datetime import datetime
 import unittest
 import pep8
 
@@ -66,6 +67,15 @@ class TestBaseClass(unittest.TestCase):
         self.after_save = self.new_instance_1.updated_at
         self.assertNotEqual(self.before_save, self.after_save)
 
+    def testSave2(self):
+        """
+        Tests if save method is working correctly
+        """
+        self.before_save = self.new_instance_1.updated_at
+        self.new_instance_1.updated_at = datetime.utcnow()
+        self.after_save = self.new_instance_1.updated_at
+        self.assertNotEqual(self.before_save, self.after_save)
+
     def testUpdate(self):
         """
         checks if update method does not affect created_at date by
@@ -74,7 +84,7 @@ class TestBaseClass(unittest.TestCase):
         self.before_update = self.new_instance_2.created_at
         self.new_instance_2.save()
         self.after_update = self.new_instance_2.created_at
-        self.assertEqual(self.before_update, self.after_update)
+        self.assertEqual(str(self.before_update), str(self.after_update))
 
     def testDict(self):
         """
