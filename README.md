@@ -122,6 +122,19 @@ $ python3 -m unittest discover test
 ```
 >> Note: All file/folders with name test... will be "discovered by the test"
 
+## JSON:
+This project involves storing and retrieving data from files. Specifically, converting
+objects into JSON format and storing them as a file so they can be deserialized and
+loaded into dictionaries during runtime.
+
+JSON is a file format/data interchange format which uses human-readable text to store
+data objects.
+
+In this program, objects stored in a dictionary within the file storage manager can
+be serialized and stored in file.json. Once the program quits and reopens, objects stored
+in the file can be retrieved, deserialized, and then loaded back into the dictionary for
+ modification/removal.
+
 ## Contributors:
 * Gustavo Hornedo
 * Jared Beguelin
