@@ -61,7 +61,7 @@ class TestUserClass(unittest.TestCase):
 
     def testUpdate(self):
         """
-        Checks if update method is woriking correctly by
+        Checks if update method is working correctly by
         comparing the different dates on the file
         """
         self.update_user = User()
