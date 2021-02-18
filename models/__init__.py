@@ -13,7 +13,7 @@ from models.user import User
 classes = {"BaseModel": BaseModel, "Amenity": Amenity, "City": City,
            "State": State, "Place": Place, "Review": Review,
            "User": User}
-from model.engine.file_storage import FileStorage
+from models.engine.file_storage import FileStorage
 
 storage = FileStorage()
 storage.reload()
