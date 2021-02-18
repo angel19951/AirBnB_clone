@@ -29,7 +29,8 @@ class TestConsole(unittest.TestCase):
 
     def setUp(self):
         """
-        Sets ups the Test console Unittest by catching
+        Sets ups the Test console Unittest by catching in/output
+        with a mock object
         """
         self.mock_stdin = create_autospec(sys.stdin)
         self.mock_stdout = create_autospec(sys.stdout)
