@@ -11,6 +11,7 @@ import pep8
 from models import classes
 from unittest.mock import patch, create_autospec
 import os
+from models import storage
 
 
 class TestConsole(unittest.TestCase):
@@ -101,6 +102,17 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as out:
             self.assertFalse(my_console.onecmd("update BaseModel 4444-"))
             self.assertEqual(out.getvalue(), "** no instance found **\n")
+
+    def test_count(self):
+        """Test count command"""
+        for k in classes.keys():
+            count = 0
+            for c in storage.all():
+                if k in c:
+                    count += 1
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd("{}.count()".format(k))
+                self.assertEqual(int(out.getvalue().strip()), count)
 
     def testDocString(self):
         """
