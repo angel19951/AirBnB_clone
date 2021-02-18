@@ -112,6 +112,15 @@ EOF  all  create  destroy  help  quit  show  update
         
 (hbnb) 
 ```
+
+## Unittest:
+All test codes present in the __*test*__/ directotr. 
+
+Tested with python unit test, for how to stars, use and stability using command as shown:
+```bash
+$ python3 -m unittest discover test
+```
+
 ## Contributors:
 * Gustavo Hornedo
 * Jared Beguelin
