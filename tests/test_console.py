@@ -69,7 +69,7 @@ class TestConsole(unittest.TestCase):
         for cls in classes:
             with patch('sys.stdout', new=StringIO()) as out:
                 HBNBCommand().onecmd("create {}".format(cls))
-                self.assertTrue(len(str(out.getvalue())) > 1)
+                self.assertTrue(len(str(out.getvalue())) == 37)
 
     def testDestroy(self):
         """
@@ -89,6 +89,16 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as out:
             self.assertFalse(my_console.onecmd("destroy BaseModel 555-ddd"))
             self.assertEqual(out.getvalue(), "** no instance found **\n")
+        for k in classes.keys():
+            obj = classes[k]()
+            key = ".".join([k, obj.id])
+            storage.all()[key] = obj
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd("destroy {} {}".format(k, obj.id))
+                self.assertEqual(out.getvalue(), '')
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd("show {} {}".format(k, obj.id))
+                self.assertEqual("** no instance found **\n", out.getvalue())
 
     def testUpdate(self):
         """
