@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-"""This module recreates a BaseModel from another one by using a
-dictionary representation."""
+"""
+Manages file storage for BaseModel objects and
+objects that are subclasses of BaseModel.
+"""
 import json
 from .. import classes
 
@@ -26,7 +28,8 @@ class FileStorage:
         self.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
 
     def save(self):
-        """Serializes __objects to the JSON file (path: __file_path)
+        """
+        Serializes __objects to the JSON file (path: __file_path)
         """
         dict_add = {}
         with open(self.__file_path, 'w') as file:
