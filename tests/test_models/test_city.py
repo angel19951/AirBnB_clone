@@ -13,7 +13,7 @@ class TestUser(unittest.TestCase):
     """
     def testPep8(self):
         """
-        Check pep8 linter requierments
+        Check pep8 linter requirements
         """
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['models/city.py',
