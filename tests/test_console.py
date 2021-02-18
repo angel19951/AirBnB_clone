@@ -103,7 +103,7 @@ class TestConsole(unittest.TestCase):
             self.assertFalse(my_console.onecmd("update BaseModel 4444-"))
             self.assertEqual(out.getvalue(), "** no instance found **\n")
 
-    def test_count(self):
+    def testCount(self):
         """
         test that count command returns appropriate val
         """
@@ -115,6 +115,20 @@ class TestConsole(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as out:
                 HBNBCommand().onecmd("{}.count()".format(k))
                 self.assertEqual(int(out.getvalue().strip()), count)
+
+    def testShow(self):
+        """
+        test that validates show command
+        """
+        for k in classes.keys():
+            obj = classes[k]()
+            storage.all()[".".join([k, obj.id])] = obj
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd("show {} {}".format(k, obj.id))
+                self.assertEqual(str(obj) + '\n', out.getvalue())
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd('{}.show("{}")'.format(k, obj.id))
+                self.assertEqual(str(obj) + '\n', out.getvalue())
 
     def testDocString(self):
         """
