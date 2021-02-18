@@ -90,8 +90,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """
-        Destroys/deletes an instance based on the Class and the ID
-
+        Validates key. If key is valid, destroys instance
+        based on the Class and the ID. If invalid, do nothing
         Usage: destroy <class_name>"
         """
         key = HBNBCommand.val_get_key(arg)
