@@ -32,7 +32,7 @@ class TestUserClass(unittest.TestCase):
 
     def testId(self):
         """
-        Checks that uuid is working correctly and has not been curropted
+        Checks that uuid is working correctly and has not been corrupted
         """
         self.new_id_1 = User()
         self.new_id_2 = User()
