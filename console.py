@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-This module is the console for the AirBnB clone
+Module for the AirBnB clone console
+Will be the actual interface through which user
+interacts w files
 """
 import cmd
 import shlex
