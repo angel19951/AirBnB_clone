@@ -66,7 +66,8 @@ class TestConsole(unittest.TestCase):
 
     def testDestroy(self):
         """
-        checks if destroy command is valid
+        tests existence of destroy method and validates
+        error messages
         """
         my_console = self.session()
         with patch('sys.stdout', new=StringIO()) as out:
