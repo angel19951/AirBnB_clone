@@ -72,7 +72,7 @@ class TestFileStorage(unittest.TestCase):
 
     def testAll(self):
         """
-        Test all method to validate it runs correctly
+        Test all method to validate that it runs correctly
         """
         my_dict = storage.all()
         self.assertEqual(type(my_dict), dict)
