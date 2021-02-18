@@ -89,15 +89,25 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as out:
             self.assertFalse(my_console.onecmd("destroy BaseModel 555-ddd"))
             self.assertEqual(out.getvalue(), "** no instance found **\n")
-        for k in classes.keys():
-            obj = classes[k]()
-            key = ".".join([k, obj.id])
+        for cls in classes.keys():
+            obj = classes[cls]()
+            key = ".".join([cls, obj.id])
             storage.all()[key] = obj
             with patch('sys.stdout', new=StringIO()) as out:
-                HBNBCommand().onecmd("destroy {} {}".format(k, obj.id))
+                HBNBCommand().onecmd("destroy {} {}".format(cls, obj.id))
                 self.assertEqual(out.getvalue(), '')
             with patch('sys.stdout', new=StringIO()) as out:
-                HBNBCommand().onecmd("show {} {}".format(k, obj.id))
+                HBNBCommand().onecmd("show {} {}".format(cls, obj.id))
+                self.assertEqual("** no instance found **\n", out.getvalue())
+        for cls in classes.keys():
+            obj = classes[cls]()
+            key = ".".join([cls, obj.id])
+            storage.all()[key] = obj
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd('{}.destroy("{}")'.format(cls, obj.id))
+                self.assertEqual(out.getvalue(), '')
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd("show {} {}".format(cls, obj.id))
                 self.assertEqual("** no instance found **\n", out.getvalue())
 
     def testUpdate(self):
