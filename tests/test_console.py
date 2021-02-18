@@ -58,12 +58,18 @@ class TestConsole(unittest.TestCase):
 
     def test_create(self):
         """
-        Test the method create of the console
+        Test that create throws proper errors + works w all classes
         """
-        my_console = self.session()
         with patch('sys.stdout', new=StringIO()) as out:
-            self.assertFalse(my_console.onecmd("create"))
+            self.assertFalse(HBNBCommand().onecmd("create asgshsd"))
+            self.assertEqual(out.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=StringIO()) as out:
+            self.assertFalse(HBNBCommand().onecmd("create"))
             self.assertEqual(out.getvalue(), "** class name missing **\n")
+        for cls in classes:
+            with patch('sys.stdout', new=StringIO()) as out:
+                HBNBCommand().onecmd("create {}".format(cls))
+                self.assertTrue(len(str(out.getvalue())) > 1)
 
     def testDestroy(self):
         """
