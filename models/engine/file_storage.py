@@ -34,7 +34,8 @@ class FileStorage:
             json.dump(dict_add, file)
 
     def reload(self):
-        """Deserializes the JSON file to __objects
+        """
+        Deserializes the JSON file to __objects
         """
         try:
             with open(self.__file_path, 'r') as file:
