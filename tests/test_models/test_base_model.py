@@ -6,6 +6,7 @@ from models.base_model import BaseModel
 from datetime import datetime
 import unittest
 import pep8
+from models import storage
 
 
 class TestBaseClass(unittest.TestCase):
@@ -71,10 +72,13 @@ class TestBaseClass(unittest.TestCase):
         """
         Tests if save method is working correctly
         """
-        self.before_save = self.new_instance_1.updated_at
-        self.new_instance_1.updated_at = datetime.utcnow()
-        self.after_save = self.new_instance_1.updated_at
-        self.assertNotEqual(self.before_save, self.after_save)
+        obj = BaseModel()
+        obj.new_att = "gotcha"
+        key = "BaseModel." + obj.id
+        obj.save()
+        storage.reload()
+        reloaded_obj = storage.all()[key]
+        self.assertTrue('new_att' in reloaded_obj.__dict__)
 
     def testUpdate(self):
         """
