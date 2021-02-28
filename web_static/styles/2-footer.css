@@ -1,0 +1,15 @@
+footer {
+    position: fixed;
+    background-color: #00FF00;
+    height: 60px;
+    width: 100%;
+    bottom: 0;
+}
+
+p {
+    position: absolute;
+    text-align: center;
+    top: 10%;
+    left: 0;
+    right: 0;
+}
