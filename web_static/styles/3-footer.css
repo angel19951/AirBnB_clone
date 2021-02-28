@@ -6,3 +6,11 @@ footer {
     border-style: solid;
     border-color: #CCCCCC;
 }
+
+p {
+    position: absolute;
+    text-align: center;
+    top: 10%;
+    left: 0;
+    right: 0;
+}

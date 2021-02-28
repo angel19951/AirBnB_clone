@@ -5,11 +5,3 @@ body {
     font-size: 14px;
     font-family:Circular,"Helvetica Neue",Halvetiva,Arial,sans-serif;
 }
-
-p {
-    position: absolute;
-    text-align: center;
-    top: 10%;
-    left: 0;
-    right: 0;
-}
